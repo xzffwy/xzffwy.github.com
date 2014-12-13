@@ -324,9 +324,14 @@ li.blog_external_body{
 	width: 100%;
 	margin: 0 auto;
 	background-size: 100% 100%;
-	position: absolute;
-	bottom: 0;
 	background-color: #FCFAFA;
+	position: absolute;
+	bottom: 0px;
+}
+.blog_footer{
+	margin-top: 10px;
+	overflow:hidden;
+	border-top: 1px solid #f0f0f0;
 }
 
 
