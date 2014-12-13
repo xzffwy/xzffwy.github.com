@@ -8,21 +8,20 @@ defaults:
    author: "ӯӯ"
 
 # Site settings
-title: Ying Ying's home
+title: Ying Ying's New World 
 email: xzffwy@163.com
-description: "If you have a job,"                    
-description1: "you need to do is,"
-description2: "do it,"
-description3: "even if you don't like,"
-description4: "you have to prove to someone that you have the ability to do one thing,"
-description5: "Others will give you a chance!"
+description: Just Be Yourself!
 
 url: "xzffwy.github.com"
 blog: old blog
-github_username: xzffwy 
+github_username: xzffwy
 
 
 
 # Build settings
 markdown: kramdown
 permalink: pretty
+
+#homepage
+menu1: Homepage
+menu2: Blog

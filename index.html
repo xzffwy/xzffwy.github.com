@@ -1,35 +1,6 @@
 ---
-layout: default
+layout: blog_list 
 ---
 
-<div class="home">
-<div>
-   <div class="home-col-1 columu" style="float:left">
-  <h1>Posts</h1>
-
-  <ul class="posts">
-  
-    {% for post in site.posts %}
-	<ul>
-      <li>
-        <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-      </li>
-	  </ul>
-    {% endfor %}
-	
-	</ul>
-	</div>
-
-   <div class="home-col-2 column" style="float:right">
-      <p class="important" align="left">{{ site.description }}</p>
-      <p class="important" align="left">{{ site.description1 }}</p>
-      <p class="important" align="left">{{ site.description2 }}</p>
-      <p class="important" align="left">{{ site.description3 }}</p>
-      <p class="important" align="left">{{ site.description4 }}</p>
-      <p class="important" align="left">{{ site.description5 }}</p>
-    </div>
-</div> 
-
-	</div>
+Something will be happen!
 
