@@ -8,7 +8,7 @@ defaults:
    author: "ӯӯ"
 
 # Site settings
-title: Ying Ying's New World 
+title: Ying Wang 
 email: xzffwy@163.com
 description: Just Be Yourself!
 
@@ -25,3 +25,6 @@ permalink: pretty
 #homepage
 menu1: Homepage
 menu2: Blog
+
+#coding
+encoding: utf-8
