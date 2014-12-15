@@ -21,6 +21,7 @@ github_username: xzffwy
 # Build settings
 markdown: kramdown
 md: kramdown
+#permalink
 permalink: pretty
 
 #homepage
@@ -30,5 +31,3 @@ menu2: Blog
 #coding
 encoding: utf-8
 
-#permalink
-permlain
