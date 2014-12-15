@@ -5,7 +5,7 @@ defaults:
    type: "pages"
   values:
    layout: "project"
-   author: "ӯӯ"
+   author: "盈盈"
 
 # Site settings
 title: Ying Wang 
@@ -20,6 +20,7 @@ github_username: xzffwy
 
 # Build settings
 markdown: kramdown
+md: kramdown
 permalink: pretty
 
 #homepage
@@ -28,3 +29,6 @@ menu2: Blog
 
 #coding
 encoding: utf-8
+
+#permalink
+permlain
