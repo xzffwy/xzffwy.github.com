@@ -1,0 +1,8 @@
+- name: 硬件虚拟化
+  category: hv 
+- name: 关于jekyll
+  category: jekyll
+- name: 关于减肥
+  category: loseweight
+- name: 杂记
+  category: something
