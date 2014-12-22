@@ -2,15 +2,7 @@
 	<section class="blog-docs">
 	<div class="blog_gird">
 		<div class="blog-unit blog-four-fifths">
-			<article>
-			<h1 class="blog-h1">{{page.tags}}</h1>
-			<div class="page-content">
-				<div class="wrap">
 					{{content}}
-				</div>
-			</div>
-			{% include comment.html %}
-			</article>
 		</div>
 		<div class="blog-unit blog-one-fifths">
 			<div class="blog_side">
@@ -24,29 +16,29 @@
 						</a>
 					</div>
 				</div>
-
 				<div id="blog_external_links" class="blog_panel blog_links">
 					<ul class="blog_panel_head">
-						<span>peferral links</span>
+						<span>文章分类</span>
 					</ul>
 					<div id="blog_external_div1">
 						<ul>
-							{% for external in site.data.externallinks %}
+							{% for blog in site.data.categories %}
 							<li class="blog_external_body">
-							<a class="blog_external_body" href="{{external.url}}">{{external.bookmark}}</a>
+							<a class="blog_external_body" href="{{site.baseurl}}/page/{{blog.category}}/">{{blog.name}}</a>
 							</li>
 							{% endfor %}
 						</ul>
 
 					</div>
 				</div>
+
 				<div id="blog_external_links" class="blog_panel blog_links">
 					<ul class="blog_panel_head">
-						<span>Top Article</span>
+						<span>外部链接</span>
 					</ul>
 					<div id="blog_external_div1">
 						<ul>
-							{% for blog in site.data.blogs %}
+							{% for external in site.data.externallinks %}
 							<li class="blog_external_body">
 							<a class="blog_external_body" href="{{external.url}}">{{external.bookmark}}</a>
 							</li>

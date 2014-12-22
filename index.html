@@ -1,6 +1,23 @@
 ---
-layout: blog_list 
+layout: default 
 ---
-
-Something will be happen!
-
+<h1 class="blog-h1">博客列表</h1>
+{% for post in site.posts %}
+<div>
+	<div>
+		<div class="blog_list_item blog_list_view">
+			<div class="blog_article_title">
+				<h1>
+					<span class="blog_link_title">
+						<a href="{{post.url | prepend:site.baseurl}}">{{post.tags}}</a>
+					</span>
+				</h1>
+			</div>
+			<div class="blog_article_manage">
+				<span class="blog_link_post_date">{{post.date | date_to_string}}
+				</span>
+			</div>
+		</div>
+	</div>
+</div>
+{% endfor %}
