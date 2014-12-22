@@ -1,0 +1,63 @@
+<div class="blog_gird">
+	<section class="blog-docs">
+	<div class="blog_gird">
+		<div class="blog-unit blog-four-fifths">
+			<article>
+			<h1 class="blog-h1">{{page.tags}}</h1>
+			<div class="page-content">
+				<div class="wrap">
+					{{content}}
+				</div>
+			</div>
+			{% include comment.html %}
+			</article>
+		</div>
+		<div class="blog-unit blog-one-fifths">
+			<div class="blog_side">
+				<div id="blog_panel_profile" class="blog_panel">
+					<ul class="blog_panel_head">
+						<span>personal data</span>
+					</ul>
+					<div id="blog_userface">
+						<a href={{site.baseurl}}>
+							<img src="/css/image/me.jpg" style="max-width: 90%">
+						</a>
+					</div>
+				</div>
+
+				<div id="blog_external_links" class="blog_panel blog_links">
+					<ul class="blog_panel_head">
+						<span>peferral links</span>
+					</ul>
+					<div id="blog_external_div1">
+						<ul>
+							{% for external in site.data.externallinks %}
+							<li class="blog_external_body">
+							<a class="blog_external_body" href="{{external.url}}">{{external.bookmark}}</a>
+							</li>
+							{% endfor %}
+						</ul>
+
+					</div>
+				</div>
+				<div id="blog_external_links" class="blog_panel blog_links">
+					<ul class="blog_panel_head">
+						<span>Top Article</span>
+					</ul>
+					<div id="blog_external_div1">
+						<ul>
+							{% for blog in site.data.blogs %}
+							<li class="blog_external_body">
+							<a class="blog_external_body" href="{{external.url}}">{{external.bookmark}}</a>
+							</li>
+							{% endfor %}
+						</ul>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</section>
+</div>
+
