@@ -1,0 +1,110 @@
+---
+layout: blog
+date:  2014/12/29 16:58:00
+title: gcc 4.8.2 install
+categories: complier
+tags: Centos 5.5 离线安装gcc-4.8.2
+---
+最近在服务器节点上装gcc-4.8.2，无奈系统太老，而且是不连网的情况下，遇到了各种问题，所以拿出来分享一下，期望大家可以用到。
+	
+# 1、下载关联软件包
+可以在 [这里][gcc-release] release文件夹下载自己需要的gcc版本，在infrastructure下有我们需要的依赖库。
+
+# 2、安装gmp(这里我安装的为gmp-4.3.2)
+{% highlight ruby %}
+tar xvf gmp-4.3.2.tar.bz2
+cd gmp-4.3.2
+mkdir build
+cd build
+//默认我是将安装包以及一切依赖文件放在/usr/local文件中，可以根据需要更改
+../configure  --prefix=/usr/local/gcc-4.8.2/gmp-4.3.2
+make && make install
+{% endhighlight %}
+
+# 3、安装mpfr(我安装的是mpf-2.4.2)
+{% highlight ruby %}
+tar xvf mpfr-2.4.2.tar.bz2
+cd mpfr-2.4.2
+mkdir build
+cd build
+../configure --prefix=/usr/local/gcc-4.8.2/mpfr-2.4.2 \ 
+    --with-gmp=/usr/local/gcc-4.8.2/gmp-4.3.2/
+make && make install
+{% endhighlight %}
+
+# 4、安装mpc(我的版本是mpc-0.8.1)
+{% highlight ruby %}
+tar zxvf mpc-0.8.1.tar.gz
+cd mpc-0.8.1
+mkdir build
+cd build
+../configure --prefix=/usr/local/gcc-4.8.2/mpc-0.8.1 \ 
+    --with-gmp=/usr/local/gcc-4.8.2/gmp-4.3.2/ \ 
+    --with-mpfr=/usr/local/gcc-4.8.2/mpfr-2.4.2/
+make && make install
+{% endhighlight %}
+
+# 5、安装isl(我的版本是isl-0.14.tar.bz2)
+这一步选作，有的版本机子不需要这一步就可以直接装gcc了，但是我的机器就不行，当时在这里面吃了很大亏，花了好多时间
+{% highlight ruby %}
+tar xvf isl-0.14.tar.bz2
+cd isl-0.14
+mkdir build
+cd build
+../configure --prefix=/usr/local/gcc-4.8.2/isl-0.14 \
+				--with-gmp-prefix=/usr/local/gcc-4.8.2/gmp-4.3.2/
+make && make install
+{% endhighlight %}
+
+# 6、对于cloog这个包我就不在说了，因为我在安装时并没有用，不过它依赖gmp和isl包，装的时候可以仿照上面
+
+# 7、环境配置
+在/etc/ld.so.conf文件夹下加入下面代码
+{% highlight ruby %}
+/usr/local/gcc-4.8.2/gmp-4.2.2/lib
+/usr/local/gcc-4.8.2/mpfr-2.4.2/lib
+/usr/local/gcc-4.8.2/mpc-0.8.1/lib
+/usr/local/gcc-4.8.2/isl-0.14/lib
+{% endhighlight %}
+执行 ldconfig 命令
+
+# 8、gcc的编译安装
+{% highlight ruby %}
+tar xvf gcc-4.8.2.tar.bz2  
+cd gcc-4.8.2  
+mkdir build  
+cd build  
+../configure --prefix=/usr/local/gcc-4.8.2 \
+				 --enable-threads=posix \ 
+				 --disable-checking \
+				 --enable-languages=c,c++ \
+				 --disable-multilib \
+				 --with-gmp=/usr/local/gcc-4.8.2/gmp-4.3.2/ \
+				 --with-mpfr=/usr/local/gcc-4.8.2/mpfr-2.4.2/ \
+				 --with-mpc=/usr/local/gcc-4.8.2/mpc-0.8.1/ \
+				 --with-ISL=/usr/local/gcc-4.8.2/isl-0.14   
+make && make install 
+//如果支持多线程建议4个线程快一些  
+{% endhighlight %}
+
+# 9、卸载旧版本
+{% highlight ruby %}
+yum remove gcc
+yum remove gcc-c++
+updagedb
+//可能会错误，但是也没有什么大碍
+{% endhighlight %}
+
+# 10、链接新版本
+{% highlight ruby %}
+cd /usr/bin
+ln -s /usr/local/gcc-4.8.2/bin/gcc gcc
+ln -s /usr/local/gcc-4.8.2/bin/g++ g++
+//如果提醒已经存在，则删除已存在的gcc/g++
+{% endhighlight %}
+
+
+参考网址:http://blog.csdn.net/ivanlxf/article/details/19080681
+
+[gcc-release]:	http://mirrors.concertpass.com/gcc/
+
