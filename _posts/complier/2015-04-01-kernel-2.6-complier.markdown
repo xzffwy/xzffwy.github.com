@@ -1,0 +1,35 @@
+---
+layout: blog
+date:  2015/4/1 11:16:47
+title: kernel 2.6 complier
+categories: complier
+tags: 高版本gcc编译2.6内核出现的问题
+---
+
+gcc版本： gcc version 4.9.1 (Ubuntu 4.9.1-16ubuntu6) 
+	
+编译错误提示:
+{% highlight ruby %}
+VDSO  arch/x86/vdso/vdso32-int80.so.dbg
+gcc: error: elf_i386: No such file or directory
+make[1]: *** [arch/x86/vdso/vdso32-int80.so.dbg] Error 1
+make: *** [arch/x86/vdso] Error 2
+chenyu@chenyu-virtual-machine:~/chenyu/linux-2.6.30.9$
+{% endhighlight %}
+
+错误最终提示：
+{% highlight ruby %}
+recipe for target 'arch/x86/vdso/vdso.so.dbg' failed
+{% endhighlight %}
+
+关于这个错误，是由于编译器版本太高，不再支持linker-style架构导致的。
+
+修改：
+在内核目录 arch/x86/vdso/Makefile中
+
+1、将VDSO_LDFLAGS_VDSO.lds= -m elf_x86_64 -WL,.....将"-m elf_x86_64" 替换为"-m64"
+
+2、将VDSO_LDFLAGS_vdso32.lds = -m elf_i386 -WL.....将"-m elf_i386" 替换为"-m32"
+
+继续编译即可。
+
