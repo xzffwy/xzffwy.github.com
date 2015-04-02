@@ -1,0 +1,29 @@
+---
+layout: blog
+date:  2015/4/2 09:46:18
+title: kernel 3.0 up reserve_bootmem
+categories: complier
+tags: 高内核版本reserve_bootmem函数内核编译找不到问题
+---
+
+# 问题描述：
+undefined reference to `reserve_bootmem'
+
+由于需要在内核启动的时候预留一部分内存，我在arch/x86/kerner/setup.c文件中加入了reserve_bootmem函数。虽然已经包含了头文件，但是内核编译时还是找不到函数。
+
+#解决方法：
+在arch/X86/Kconfig文件的686、687行找到如下代码：
+{% highlight ruby %}
+config NO_BOOTMEM
+def_bool y
+{% endhighlight %}
+改为：
+{% highlight ruby %}
+config NO_BOOTMEM
+def_bool n 
+{% endhighlight %}
+
+#原因：
+内核在配置文件上默认定义了宏CONFIG_NO_BOOTMEM,所以每次内核编译，系统默认编译的是no_bootmem.c文件而不是bootmem.c.将CONFIG_NO_BOOTMEM改为N，则系统就会编译bootmem.c文件，进而找到reserve_bootmem函数。
+
+
